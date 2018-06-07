@@ -26,12 +26,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tvRetrofit = (TextView) findViewById(R.id.tv_retrofit);
-        //Retrofit的创建
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://tjllt.ethane.com.cn/PalmViolationInfo/")//接口总根
-                .build();
         // 创建 网络请求接口 的实例
-        RequestService requestSerives = retrofit.create(RequestService.class);
+        RequestService requestSerives = RetrofitClass.retrofit.create(RequestService.class);
 //        Call<ResponseBody> call = requestSerives.getWeather("深圳");//传入我们请求的键值对的值value
         Call<ResponseBody> call = requestSerives.getWeather();//传入我们请求的键值对的值value
         call.enqueue(new Callback<ResponseBody>() {
@@ -46,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
             }
 
             //请求失败的方法
